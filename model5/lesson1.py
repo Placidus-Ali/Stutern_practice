@@ -14,12 +14,12 @@ print("Connection successful")
 cursor = conn.cursor()
 
 #check
-print("Cuursor created successfful")
+print("Cursor created successfful")
 
 #querying the databsae using ORDER BY
-item = cursor.execute("""SELECT * FROM students_data
-                    WHERE last_name like J&
-                    ORDER BY first_name:
+item = cursor.execute(""" SELECT * FROM students_data
+                WHERE last_name LIKE 'J%'
+                ORDER BY first_name;
 """)
 
 for row in item:
