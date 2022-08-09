@@ -68,7 +68,7 @@ conn.commit()
 # Alter table
 #change the tabel name
 
-# cursor.execute("ALTER TABLE student_data RENAME student_info")
+# cursor.execute("ALTER TABLE student_data RENAME TO student_info")
 
 #Alter column name
 # cursor.execute("ALTER TABLE students_data ADD COLUMN Course")

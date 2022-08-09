@@ -2,7 +2,7 @@ import sqlite3
 import csv
 
 #create a connection
-conn = sqlite3.connect("weac_result.db")
+conn = sqlite3.connect("waec_result.db")
 
 #check 
 print("Connection created")
@@ -11,37 +11,40 @@ print("Connection created")
 cursor = conn.cursor()
 
 #create a table called waec_result
-# create_table = """
-# CREATE TABLE waec_result(
-#         name text,
-#         english integer,
-#         maths integer,
-#         biology integer,
-#         chemistry integer,
-#         physics integer,
-#         agric integer,
-#         igbo integer,
-#         geography integer,
-#         crs integer
+create_table = """
+CREATE TABLE waec_result(
+        Name TEXT,
+        English INTEGER,
+        Maths INTEGER,
+        Biology INTEGER,
+        Chemistry INTEGER,
+        Physics INTEGER,
+        Agric INTEGER,
+        Igbo INTEGER,
+        Geography INTEGER,
+        CRS INTEGER
             
-#     )
-#    """
+    )
+   """
 
 #check
 print("Table created")
 
+conn.commit()
+
+
 cursor.execute(create_table)
 
 #load existing table
-with open('waec_result.csv', 'r') as open_file:
-    read_file = csv.reader(open_file)
+with open('waec_result.csv', 'r') as opened_file:
+    read_file = csv.reader(opened_file)
 
-    cursor.executemany(
-        """
-        INSERT INTO waec_result VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, 
-        read_file
-    )
+    #This command is used to skip header
+    next(opened_file)
+
+    cursor.executemany(""" INSERT INTO waec_result VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", read_file)
 
 #check
 print("data loaded into the table successfully")
+
+conn.commit()
